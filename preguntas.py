@@ -66,8 +66,9 @@ def pregunta_09():
 
 def pregunta_10():
     tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
-    tbl0_grouped = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(map(str, sorted(x)))).reset_index()
-    return tbl0_grouped
+    tbl0_agg = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(map(str, sorted(x)))).reset_index(name="_c2")
+    tbl0_agg.set_index("_c1", inplace=True)
+    return tbl0_agg
 
 
 def pregunta_11():
